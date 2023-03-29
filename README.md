@@ -73,7 +73,7 @@ WHERE MANAGER_ID != '';
 ---    
     
 ### 9. 커미션을 버는 모든 사원들의 LAST_NAME, 연봉 및 커미션을 조회한다.    
--- 연봉 역순, 커미션 역순차로 정렬한다.    
+#### 연봉 역순, 커미션 역순차로 정렬한다.    
 SELECT LAST_NAME, SALARY, COMMISSION_PCT    
 FROM EMPLOYEES    
 WHERE COMMISSION_PCT IS NOT NULL    
@@ -115,10 +115,12 @@ WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID;
      
 ---    
      
-### 15. 부서번호 30내의 모든 직업들을 유일한 포맷(중복제거)으로 조회한다. (90 부서 또한 포함한다.)     
-SELECT DISTINCT JOB_ID, DEPARTMENT_ID     
-FROM EMPLOYEES     
-WHERE DEPARTMENT_ID IN (30, 90);    
+### 15. 부서번호 30내의 모든 직업들을 유일한 포맷(중복제거)으로 조회한다. (90 부서 또한 포함한다.)
+#### JOB_ID, DEPARTMENT_ID, DEPARTMENT_NAME를 출력하고 JOB_ID 오름차순으로 정렬하시오    
+SELECT DISTINCT E.JOB_ID, D.DEPARTMENT_ID, D.DEPARTMENT_NAME
+FROM EMPLOYEES E, DEPARTMENTS D
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID AND D.DEPARTMENT_ID IN (30, 90)
+ORDER BY E.JOB_ID;
     
 ---    
     
