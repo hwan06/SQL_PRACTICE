@@ -160,6 +160,33 @@ WHERE (SELECT HIRE_DATE
 		WHERE LAST_NAME = 'Davies') < HIRE_DATE;    
 		
 ---
+
+### 18. Popp보다 급여가 높은 사원의 LAST_NAME과 급여를 조회하시오    
+SELECT LAST_NAME, SALARY    
+FROM EMPLOYEES    
+WHERE SALARY > (SELECT SALARY     
+		FROM EMPLOYEES     
+		WHERE LAST_NAME = 'Popp');    
+
+---
+
+### 19. 부서번호가 100인 부서에 속한 사원 중 전체 사원의 평균급여보다 높은 급여를 받는 사원의 LAST_NAME, 급여, 소속부서를 조회하시오.    
+SELECT E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME    
+FROM EMPLOYEES E, DEPARTMENTS D    
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID    
+AND E.DEPARTMENT_ID = 100     
+AND (SELECT AVG(SALARY)    
+	FROM EMPLOYEES) < SALARY;    
+				
+---
+
+### 20. 각 부서별 최고 급여를 받는 사람의 LAST_NAME, 급여, 소속부서를 조회하시오.	
+SELECT E.LAST_NAME, SALARY, D.DEPARTMENT_NAME     
+FROM EMPLOYEES E, DEPARTMENTS D    
+WHERE E.DEPARTMENT_ID = D.DEPARTMENT_ID    
+AND SALARY IN (SELECT MAX(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID);		    
+		
+---
 ### * 조인(Join)문 연습   
 ### J-1) 급여가 3000이상인 사원번호, LAST_NAME, SALARY, 부서명, 도시명을 조회하시오.    
 SELECT E.EMPLOYEE_ID, E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME, L.CITY    
